@@ -4,26 +4,34 @@ const {MiniCssExtractPlugin} = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './src/main.js',
-  };
-
-
-module.exports = {
-  entry: './path/to/my/entry/file.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'my-first-webpack.bundle.js',
-  },
-};
-
-module.exports = {
     output: {
-      filename: 'my-first-webpack.bundle.js',
+        path:process.env.NODE_ENV == 'development' ? __dirname : path.resolve(__dirname,'dist'),
+        filename: 'main.js'
     },
-    module: {
-      rules: [{ test: /\.txt$/, use: 'raw-loader' }],
+    plugins:[
+        new VueLoaderPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "main.css"
+        })
+    ],
+    resolve:{
+       extensions: ['.js','.json','.vue'],
+       alias:{
+           vue: 'vue/dist/vue.esm-bundler.js'
+       }
     },
-  };
-
- module.exports = {
-    mode: 'production',
-  };
+    module:{
+        rules:[
+            {
+                test:/\.vue$/,
+                loader:'vue-loader'
+            },
+            {
+                test:/\.css$/,
+                use:[
+                    MiniCssExtractPlugin.loader,"css-loader"
+                ]
+            }
+        ]
+    }
+};

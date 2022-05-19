@@ -4,15 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "SET NODE_ENV=development webpack --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Julio Antloga",
   "license": "ISC",
   "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.33",
+    "css-loader": "^6.7.1",
     "mini-css-extract-plugin": "^2.6.0",
     "vue-loader": "^17.0.0",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "vue": "^3.2.33"
   }
 }
